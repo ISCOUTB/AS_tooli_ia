@@ -1,0 +1,5 @@
+glpi-data/
+db_data/
+*.tgz
+*.log
+.env
