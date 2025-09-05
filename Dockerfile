@@ -2,9 +2,10 @@ FROM php:8.1-apache
 
 RUN apt-get update && apt-get install -y \
     libpng-dev libjpeg-dev libwebp-dev libfreetype6-dev \
-    mariadb-client unzip wget git
+    mariadb-client unzip wget git \
+    libicu-dev  # Añadido para intl
 
-RUN docker-php-ext-install mysqli gd && a2enmod rewrite
+RUN docker-php-ext-install mysqli gd intl && a2enmod rewrite  # Añadido intl aquí
 
 WORKDIR /var/www/html
 

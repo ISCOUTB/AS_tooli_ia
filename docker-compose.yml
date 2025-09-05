@@ -6,8 +6,6 @@ services:
       - "8200:80"
     depends_on:
       - db
-    volumes:
-      - ./glpi-data:/var/www/html
   db:
     image: mariadb
     environment:
