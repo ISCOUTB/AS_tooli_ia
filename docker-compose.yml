@@ -1,13 +1,25 @@
 version: '3.7'
+
 services:
   glpi:
     build: .
+    restart: always
     ports:
       - "8200:80"
     depends_on:
       - db
+    environment:
+      - TIMEZONE=America/Bogota
+      - DB_HOST=db
+      - DB_USER=glpi
+      - DB_PASSWORD=glpi
+      - DB_NAME=glpi
+    volumes:
+      - glpi_data:/var/www/html/glpi
+
   db:
     image: mariadb
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: glpi
@@ -15,5 +27,19 @@ services:
       MYSQL_PASSWORD: glpi
     volumes:
       - db_data:/var/lib/mysql
+
+  n8n:
+    image: n8nio/n8n:latest
+    restart: always
+    ports:
+      - "5678:5678"
+    environment:
+      - GENERIC_TIMEZONE=America/Bogota
+      - N8N_SECURE_COOKIE=false
+    volumes:
+      - n8n_data:/home/node/.n8n
+
 volumes:
   db_data:
+  glpi_data:
+  n8n_data:

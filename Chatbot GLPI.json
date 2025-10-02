@@ -1,0 +1,465 @@
+{
+  "name": "Chatbot GLPI",
+  "nodes": [
+    {
+      "parameters": {
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        -400,
+        96
+      ],
+      "id": "3c0a739e-bdf3-454e-a173-21d2bc3a0832",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -328,
+        320
+      ],
+      "id": "521f458d-4c38-444e-b5c0-2ac0378bda0c",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "PxR9UVN3gWPgnuqn",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "8688c9e9-02d6-494e-9f59-d4f1bcc44e4e",
+      "name": "Final Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1520,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\n\n// Si Gemini genera un mensaje, lo usamos.\nconst finalMessage = $('Merge History').first().json.mensaje_bot || \"Error: El agente no pudo generar una respuesta conversacional. Inténtalo de nuevo.\";\n\n// Construir la respuesta final limpia\nconst response = {\n    success: true,\n    message: finalMessage, // <-- Usamos el mensaje generado por Gemini\n    status: data.status || \"recopilando\",\n    datos_recopilados: data.datos_recopilados || {},\n    datos_faltantes: data.datos_faltantes || [],\n    listo: data.listo_para_crear === true, // Usa la decisión del LLM\n    timestamp: new Date().toISOString()\n};\n\nreturn [{ json: response }];"
+      },
+      "id": "72f403fe-a3f0-4bfa-a751-20dd4bee8e93",
+      "name": "Code3",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1296,
+        192
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// =========================================================\n// CODE (RAMA TRUE): Preparar payload para GLPI\n// Este nodo accede directamente a la salida de Code4.\n// =========================================================\n\n// 1. OBTENER DATOS DIRECTAMENTE DEL NODO CODE4 (CORRECCIÓN CLAVE)\n// Usamos el nombre del nodo Code4 (asumimos que se llama 'Code4')\nconst data = $node[\"Code4\"].json; \n\n// 2. VERIFICACIÓN CRÍTICA (La línea que fallaba)\n// Si listo_para_crear fue TRUE, ticket_data debe existir.\nif (!data.ticket_data) {\n  // Si no se encuentra, es un fallo del LLM o del parser.\n  throw new Error('No ticket data found from Code4, cannot proceed to create ticket.');\n}\n\n// 3. CONSTRUIR EL PAYLOAD PARA GLPI\nconst glpiPayload = {\n  // Estructura JSON final que espera el HTTP Request para GLPI\n  input: {\n    name: data.ticket_data.name,\n    content: data.ticket_data.content,\n    type: data.ticket_data.type,\n    urgency: data.ticket_data.urgency,\n    impact: data.ticket_data.impact,\n    priority: data.ticket_data.priority\n  }\n};\n\n// Retornamos el payload preparado para InitSession\nreturn [{ json: glpiPayload }];"
+      },
+      "id": "7cc6c2a6-9997-483f-ab6b-2dbfe5cca2d2",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        848,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $node[\"Code4\"].json.listo_para_crear }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              },
+              "id": "7f4f5193-e8d0-40ec-8bcf-bd326571e524"
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "1daec0ff-d866-4e5e-bb60-8c40115e76ea",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        624,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO n8n_conversations (conversation_id, history) \nVALUES ('{{ $node[\"Webhook\"].json.body.conversationId }}', \n        '{{ JSON.stringify($json.datos_recopilados_fusionados) }}') \nON DUPLICATE KEY UPDATE history = '{{ JSON.stringify($json.datos_recopilados_fusionados) }}';"
+      },
+      "id": "69255c6b-0d26-4ca3-80ec-d43b5c7ae9dd",
+      "name": "Save Chat History (DB)",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        400,
+        96
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "mySql": {
+          "id": "ysvu75UgVKbrQJxO",
+          "name": "MySQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Reemplaza el código del nodo Code4 con esto:\nconst geminiItem = $input.first().json;\nlet responseText = '';\n\n// Extraer el texto de la respuesta de Gemini (ajustado para la salida del Basic LLM Chain)\nif (geminiItem.text) { \n    responseText = geminiItem.text; \n} else if (geminiItem.content?.parts?.[0]?.text) {\n    responseText = geminiItem.content.parts[0].text;\n} else { \n    throw new Error('No se encontró el texto en la respuesta del modelo.'); \n}\n\n// Limpiar markdown y espacios\nconst cleanedText = responseText.replace(/```json\\n?/gi, '').replace(/```/g, '').trim();\n\n// Intentar parsear el JSON\ntry { \n    const parsedJson = JSON.parse(cleanedText); \n    return [{ json: parsedJson }]; \n} catch (error) { \n    return [{ json: { \n        error_code: 'PARSING_FAILED', \n        error_message: 'Fallo al procesar el JSON de Gemini: ' + error.message \n    }}]; \n}"
+      },
+      "id": "b4612c43-e213-441e-bcad-257e2833b971",
+      "name": "Code4",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -48,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT history FROM n8n_conversations WHERE conversation_id = '{{ $json.body.conversationId }}' LIMIT 1;"
+      },
+      "id": "2417fb17-dc2b-4f86-bf47-c2e569643ba3",
+      "name": "Get Chat History (DB)",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        -1072,
+        96
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "mySql": {
+          "id": "ysvu75UgVKbrQJxO",
+          "name": "MySQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "0b7a6203-27c3-46e5-b22e-39dd71a6f804",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "cd328125-257c-4eed-9ef2-e39ffa1c2d98",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1296,
+        96
+      ],
+      "webhookId": "0b7a6203-27c3-46e5-b22e-39dd71a6f804"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "291e8b11-2c3d-4683-a36e-b534ad3479bf",
+              "name": "chatPrompt",
+              "value": "={{ $node[\"Webhook\"].json.body.message }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -848,
+        96
+      ],
+      "id": "202697f0-2576-4da4-8cb2-e3df55341831",
+      "name": "Set Chat Input",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// ===============================================\n// 1. OBTENER DATOS (usando referencias directas a nodos)\n// ===============================================\n\n// Referencia al historial de la DB (se usa en el prompt)\nconst chatHistory = $('Get Chat History (DB)').first().json.history;\n\n// Referencia al mensaje del Webhook original (se usa en el prompt)\nconst userMessage = $('Webhook').first().json.body.message;\n\n\n// ===============================================\n// 2. ENSAMBLAR EL PROMPT COMPLETO\n// ===============================================\n\nconst chatInput = `\nERES: TOOLI-BOT, un asistente de soporte técnico experto de la Universidad. Tu objetivo es obtener toda la información necesaria de un estudiante para crear un ticket en GLPI.\n\nREGLA CRÍTICA 1 (Formato): SIEMPRE debes responder ÚNICAMENTE con un objeto JSON válido.\nREGLA CRÍTICA 2 (ID UTB): El ID de usuario SIEMPRE debe seguir el formato 'T000XXXXX' (T000 + cinco números). Si el usuario proporciona un ID inválido, debes solicitarlo de nuevo, citando este formato.\n\n### REQUISITOS OBLIGATORIOS ###\nDebes obtener los siguientes datos antes de marcar 'listo_para_crear: true':\n1.  Nombre completo del usuario.\n2.  ID o número de contacto del usuario.\n3.  Descripción detallada del problema o solicitud.\n4.  Ubicación (Aula/Laboratorio/Edificio).\n\n### CONTEXTO DE CONVERSACIÓN ###\n- HISTORIAL: ${chatHistory}\n- MENSAJE NUEVO: ${userMessage}\n\nAnaliza la información disponible. Si faltan datos para los REQUISITOS OBLIGATORIOS, devuélvelos en el campo 'datos_faltantes'.\n\n---\n\n### FORMATO DE SALIDA JSON (Ejemplos)\n\nSI TIENES TODOS LOS DATOS:\n\\`\\`\\`json\n{\n  \"listo_para_crear\": true,\n  \"mensaje_bot\": \"¡El ticket de soporte ha sido creado exitosamente! Un agente de la UTB revisará tu solicitud en breve. ¿Necesitas algo más?\", \n  \"ticket_data\": {\n    \"name\": \"Título conciso del problema\",\n    \"content\": \"Usuario: [Nombre]\\\\nID: [ID]\\\\nUbicación: [Ubicación]\\\\nProblema: [Descripción]\",\n    \"type\": 1,\n    \"urgency\": 3,\n    \"impact\": 3,\n    \"priority\": 3\n  }\n}\n\\`\\`\\`\n\nSI TE FALTA ALGO:\n\\`\\`\\`json\n{\n  \"listo_para_crear\": false,\n  \"mensaje_bot\": \"Gracias por la información. Para poder ayudarte, por favor, ¿puedes proporcionarme tu ID de estudiante, asegurándote de que siga el formato T000XXXXX? También necesito saber dónde te encuentras.\", // <-- Gemini genera el mensaje\n  \"datos_recopilados\": { \"nombre\": \"...\", \"problema\": \"...\" },\n  \"datos_faltantes\": [\"ID\", \"ubicacion\"] \n}\n\\`\\`\\`\n`;\n\n// ===============================================\n// 3. RETORNAR EL PROMPT ENSAMBLADO\n// ===============================================\n\nreturn [{ json: { chatInput: chatInput } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -624,
+        96
+      ],
+      "id": "feb467dc-2890-42d9-82ad-901aa61b3667",
+      "name": "Prepare Gemini Prompt"
+    },
+    {
+      "parameters": {
+        "jsCode": "// ===================================================\n// FUSION DE DATOS: Garantiza que la información antigua se mantenga\n// ===================================================\n\n// 1. OBTENER DATOS ANTIGUOS (Directo de la DB)\n// Obtenemos el objeto 'datos_recopilados' de la ÚLTIMA conversación guardada\nconst oldHistoryRaw = $node[\"Get Chat History (DB)\"].json[0]?.history;\nconst oldCollectedData = oldHistoryRaw ? JSON.parse(oldHistoryRaw).datos_recopilados || {} : {};\n\n// 2. OBTENER DATOS NUEVOS (Directo del Code4/Parser)\n// Obtenemos los datos que Gemini acaba de extraer\nconst newCollectedData = $node[\"Code4\"].json.datos_recopilados || {};\n\n// 3. FUSIÓN: Utilizamos el operador spread (...) para fusionar los datos.\n// Los datos nuevos siempre tienen prioridad (por si el usuario corrige un dato).\nconst mergedData = {\n    ...oldCollectedData,\n    ...newCollectedData \n};\n\n// 4. Retornar el objeto fusionado con el nombre correcto para la consulta SQL\nreturn [{ json: { datos_recopilados_fusionados: mergedData } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        176,
+        96
+      ],
+      "id": "7eeb28ac-2bdf-4b29-b88e-2a79cb013e51",
+      "name": "Merge History"
+    },
+    {
+      "parameters": {
+        "url": "http://glpi/apirest.php/initSession",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "App-Token",
+              "value": "vQN6BblDbsn1IKtPmbN05jexRC6lpwRWmr3YPK16"
+            },
+            {
+              "name": "Authorization",
+              "value": "user_token k6vt81ETRA72FS39yJq48IAaf6g8EmFTAnEoMsNW"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "186cba19-ad3a-4802-b07e-8d755b4157dd",
+      "name": "InitSession",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1072,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://glpi/apirest.php/Ticket",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Session-Token",
+              "value": "={{ $node[\"InitSession\"].json.session_token }}"
+            },
+            {
+              "name": "App-Token",
+              "value": "vQN6BblDbsn1IKtPmbN05jexRC6lpwRWmr3YPK16"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $node[\"Code\"].json }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1296,
+        0
+      ],
+      "id": "8c1e2e6d-321d-4104-961d-be61c6339463",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Code4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code3": {
+      "main": [
+        [
+          {
+            "node": "Final Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "InitSession",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Chat History (DB)": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code4": {
+      "main": [
+        [
+          {
+            "node": "Merge History",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Chat History (DB)": {
+      "main": [
+        [
+          {
+            "node": "Set Chat Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get Chat History (DB)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Chat Input": {
+      "main": [
+        [
+          {
+            "node": "Prepare Gemini Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Gemini Prompt": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge History": {
+      "main": [
+        [
+          {
+            "node": "Save Chat History (DB)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "InitSession": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Final Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "9264942f-2650-41a8-af0d-599a8ed56e04",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b103f4bf9621f2d6b197c0e2633a75a022675ce2112b8410d5689f794fa42786"
+  },
+  "id": "kEQii2cGCd3p2xrL",
+  "tags": []
+}
