@@ -1,5 +1,22 @@
-glpi-data/
-db_data/
-*.tgz
+# Directorios de Node y Dependencias
+node_modules/
+.npm/
+.nvm/
+
+# Archivos de n8n (CRUCIALES: Contienen credenciales y caché de la app)
+.n8n/
+.n8n_custom_credentials
+
+# Archivos de Log y Caché
 *.log
+npm-debug.log*
+
+# Entorno de Sistema Operativo y Editores
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Ignorar archivos temporales o generados de Docker/Compose
+# (aunque estos deberían estar limpios, es buena práctica)
+*.swp
 .env
