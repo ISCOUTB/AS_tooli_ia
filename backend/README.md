@@ -13,8 +13,8 @@ Este proyecto es un API Gateway minimalista construido con Flask que actúa como
 ## Configuración
 
 Edita el archivo `.env` con tus configuraciones:
-- `N8N_WEBHOOK_URL_CHAT`: URL del webhook de n8n para chat.
-- `N8N_WEBHOOK_URL_GLPI`: URL del webhook de n8n para GLPI.
+- `N8N_WEBHOOK_URL_CHAT`: URL del webhook de n8n para chat (actual: http://20.151.72.161:5678/webhook/ai-chat-test-v2).
+- `N8N_WEBHOOK_URL_GLPI`: URL del webhook de n8n para GLPI (actual: http://20.151.72.161:5678/webhook/ai-chat-test-v2).
 - Otras variables como `SECRET_KEY`, etc.
 
 ## Ejecución

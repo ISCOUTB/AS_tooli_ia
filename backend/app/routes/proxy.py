@@ -21,18 +21,45 @@ def chat_message():
     # Remove credentials from payload before forwarding
     payload.pop('username', None)
     payload.pop('password', None)
+
     try:
-        response = n8n_service.forward_request(Config.N8N_WEBHOOK_URL_CHAT, user_id, payload)
+        result = n8n_service.forward_request(Config.N8N_WEBHOOK_URL_CHAT, user_id, payload)
+        # result: {'status_code': int, 'ok': bool, 'body': ...}
+        if not result.get('ok'):
+            return jsonify({
+                'success': False,
+                'data': result.get('body', {}),
+                'message': f'n8n returned status {result.get("status_code")}'
+            }), 502
+
+        # Normalize body into { 'message': '...' } shape expected by frontend
+        body = result.get('body', {})
+        if isinstance(body, dict) and 'message' in body:
+            response_body = body
+        elif isinstance(body, dict) and 'text' in body:
+            response_body = {'message': body.get('text')}
+        elif isinstance(body, str):
+            response_body = {'message': body}
+        else:
+            response_body = {'message': str(body)}
+
         return jsonify({
             'success': True,
-            'data': response,
-            'message': 'Message sent'
+            'data': response_body,
+            'message': 'Message forwarded'
         }), 200
-    except Exception as e:
+
+    except RuntimeError as e:
         return jsonify({
             'success': False,
             'data': {},
             'message': str(e)
+        }), 504
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'data': {},
+            'message': f'Unexpected error: {e}'
         }), 500
 
 @proxy_bp.route('/tickets', methods=['GET'])
