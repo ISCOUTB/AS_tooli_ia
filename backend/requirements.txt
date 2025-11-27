@@ -1,0 +1,57 @@
+# =====================================================
+# GLPI AI ASSISTANT - REQUIREMENTS.TXT COMPLETO
+# Todas las dependencias necesarias para el backend
+# =====================================================
+
+# ===== Framework Web =====
+fastapi==0.115.5
+uvicorn[standard]==0.34.0
+pydantic==2.10.3
+pydantic-settings==2.6.1
+email-validator==2.2.0  # Para EmailStr en Pydantic
+
+# ===== AI - Groq =====
+groq==0.11.0  # Cliente oficial de Groq AI para LLaMA 3.3
+
+# ===== Azure OpenAI (Opcional) =====
+openai==1.55.3
+azure-identity==1.19.0
+
+# ===== Base de Datos =====
+SQLAlchemy==2.0.36  # ORM para base de datos
+PyMySQL==1.1.1  # Driver MySQL/MariaDB para Python
+cryptography==44.0.0  # Requerido por PyMySQL para conexiones seguras
+
+# ===== Seguridad y Autenticación =====
+PyJWT==2.9.0  # Manejo de JWT tokens
+passlib[bcrypt]==1.7.4  # Hashing de contraseñas con bcrypt
+python-jose[cryptography]==3.3.0  # Alternativa para JWT (si es necesario)
+bcrypt==4.2.1  # Backend de encriptación para passlib
+
+# ===== HTTP Requests =====
+requests==2.32.3
+httpx==0.28.1
+
+# ===== Utilidades =====
+python-dotenv==1.0.0
+python-multipart==0.0.6
+python-dateutil==2.8.2
+
+# ===== CORS =====
+# Nota: fastapi-cors ya no se usa, FastAPI tiene CORS integrado
+# Se deja comentado para referencia
+# fastapi-cors==0.0.6
+
+# ===== Logging =====
+loguru==0.7.2
+
+# ===== Testing (Opcional) =====
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0  # Cobertura de tests
+
+# ===== Validación de Email =====
+email-validator==2.2.0
+
+# ===== Otras dependencias útiles =====
+typing-extensions==4.12.2  # Soporte de tipos extendido

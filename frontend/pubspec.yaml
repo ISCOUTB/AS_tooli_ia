@@ -1,0 +1,47 @@
+name: glpi_assistant
+description: Professional GLPI IT Service Management Assistant
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # HTTP Client
+  http: ^1.1.0
+  
+  # State Management
+  provider: ^6.1.1
+  
+  # UI Components
+  flutter_svg: ^2.0.9
+  google_fonts: ^6.1.0
+  cupertino_icons: ^1.0.6
+  flutter_markdown: ^0.7.4+1
+  
+  # Loading indicators
+  flutter_spinkit: ^5.2.0
+  
+  # Toast messages
+  fluttertoast: ^8.2.4
+  
+  # Shared preferences for theme
+  shared_preferences: ^2.2.2
+  
+  # URL Launcher for SSO
+  url_launcher: ^6.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  
+  assets:
+    - assets/images/
+    - assets/icons/

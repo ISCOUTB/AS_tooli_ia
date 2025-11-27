@@ -1,0 +1,79 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# ===== ARCHIVOS CRÍTICOS CON CREDENCIALES - NUNCA SUBIR =====
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+backend/.env
+backend/.env.local
+backend/.env.production
+*.env
+**/.env
+
+# Archivos con credenciales
+**/credentials.json
+**/secrets.json
+**/config.local.py
+*.pem
+*.key
+*.p12
+*.pfx
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Flutter
+*.dart_tool/
+*.flutter-plugins
+*.flutter-plugins-dependencies
+*.packages
+.pub-cache/
+.pub/
+build/
+
+# Documentación y tests viejos
+_documentacion_vieja/
+_tests_viejos/
+
+# Archivos de base de datos
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos temporales y scripts de prueba
+*.tmp
+temp_*
+_temp_*
+**/verify_*.py
+**/security_check.py
+**/init_*.py
