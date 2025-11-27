@@ -1,434 +1,793 @@
-# 🤖 GLPI AI Assistant# 🤖 GLPI AI Assistant# 🤖 GLPI AI Assistant# GLPI Assistant - Professional IT Service Management AI# 🤖 Agente Inteligente para GLPI (Tooli)
-
-
+﻿# 🤖 Agente Inteligente para GLPI (Tooli)
 
 <div align="center">
 
-
-
-[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)<div align="center">
-
+[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green.svg)](https://fastapi.tiangolo.com/)
-
 [![Flutter](https://img.shields.io/badge/Flutter-3.0+-cyan.svg)](https://flutter.dev/)
-
 [![Groq](https://img.shields.io/badge/Groq-LLaMA%203.3-orange.svg)](https://groq.com/)
-
-[![GLPI](https://img.shields.io/badge/GLPI-10.x-red.svg)](https://glpi-project.org/)[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)> Asistente inteligente para GLPI IT Service Management con IA conversacional
-
+[![GLPI](https://img.shields.io/badge/GLPI-10.x-red.svg)](https://glpi-project.org/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green.svg)](https://fastapi.tiangolo.com/)
-
-**Asistente inteligente de lenguaje natural para GLPI IT Service Management**
-
-[![Flutter](https://img.shields.io/badge/Flutter-3.0+-cyan.svg)](https://flutter.dev/)
-
-Consulta tickets, inventario y estadísticas usando IA conversacional con LLaMA 3.3
-
-[![Groq](https://img.shields.io/badge/Groq-LLaMA%203.3-orange.svg)](https://groq.com/)
+> **Asistente inteligente de lenguaje natural para GLPI IT Service Management**
+>
+> Consulta tickets, inventario y estadísticas usando IA conversacional con LLaMA 3.3.
 
 [Características](#-características) • [Instalación](#-instalación) • [Uso](#-uso) • [Arquitectura](#-arquitectura)
 
-[![GLPI](https://img.shields.io/badge/GLPI-10.x-red.svg)](https://glpi-project.org/)Consulta tickets, inventario y estadísticas de GLPI usando lenguaje natural. Powered by Groq AI (LLaMA 3.3 70B).> Enterprise-grade intelligent assistant for GLPI with natural language processing> **Consulta información de GLPI mediante preguntas en lenguaje natural**
-
 </div>
 
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
 ---
-
-
 
 ## 📋 Descripción
 
-**Asistente inteligente de lenguaje natural para GLPI IT Service Management**
-
 Sistema de asistente virtual que utiliza **Groq AI** (LLaMA 3.3) para procesar consultas en lenguaje natural y extraer información del sistema **GLPI IT Service Management**. Desarrollado con **FastAPI** (backend) y **Flutter** (frontend multiplataforma).
 
-[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org)
+**Agente de IA que facilita el acceso a datos de inventario, tickets y reportes en GLPI (Tooli), brindando respuestas rápidas y precisas a solicitudes internas.**
+
+---
 
 ## ✨ Características
 
-Consulta tickets, inventario y estadísticas usando IA conversacional con LLaMA 3.3
-
 ### 🎫 Gestión de Tickets
 
-- Consulta tickets por estado (abiertos, cerrados, pendientes)[![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com)
-
+- Consulta tickets por estado (abiertos, cerrados, pendientes)
 - Búsqueda por fechas, usuarios, categorías
-
-- Análisis estadístico avanzado con visualización de distribuciones[Características](#-características) • [Instalación](#-instalación) • [Uso](#-uso) • [Arquitectura](#-arquitectura)
-
+- Análisis estadístico avanzado con visualización de distribuciones
 - Identificación de tendencias y patrones
-
-[![Flutter](https://img.shields.io/badge/Flutter-3.0+-02569B.svg)](https://flutter.dev)## 🎯 Executive SummaryAgente de IA que facilita el acceso a datos de inventario, tickets y reportes en GLPI (Tooli), brindando respuestas rápidas y precisas a solicitudes internas.
 
 ### 💻 Inventario de TI
 
-- Consulta de equipos y activos tecnológicos</div>
-
+- Consulta de equipos y activos tecnológicos
 - Búsqueda por ubicación, tipo, modelo, fabricante
-
-- Detalle técnico de componentes (CPU, RAM, disco, red)[![Groq](https://img.shields.io/badge/Groq-LLaMA%203.3-orange.svg)](https://groq.com)
-
+- Detalle técnico de componentes (CPU, RAM, disco, red)
 - Información de software instalado
-
----
 
 ### 🤖 IA Conversacional
 
 - Procesamiento de lenguaje natural con **Groq LLaMA 3.3-70B**
-
 - Comprensión contextual de consultas complejas
-
-- Respuestas en español e inglés## 📋 Descripción
-
+- Respuestas en español e inglés
 - Análisis de grandes volúmenes de datos (1000+ tickets)
-
----
 
 ### 🔐 Seguridad
 
-- Autenticación JWT para API RESTSistema de asistente virtual que utiliza **Groq AI** (LLaMA 3.3) para procesar consultas en lenguaje natural y extraer información del sistema **GLPI IT Service Management**. Desarrollado con **FastAPI** (backend) y **Flutter** (frontend multiplataforma).
-
+- Autenticación JWT para API REST
 - Soporte para SSO con OAuth 2.0 (Microsoft Entra ID)
-
-- Cifrado de credenciales y tokensGLPI Assistant transforms IT service management by providing an intelligent, conversational interface to GLPI data. Built with enterprise architecture principles and powered by advanced AI, it enables teams to access critical information through simple natural language queries.[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/downloads/)
-
+- Cifrado de credenciales y tokens
 - Integración segura con API de GLPI
-
-## ✨ Características
 
 ### 📊 Reporting
 
-- Estadísticas en tiempo real## ✨ Características
-
+- Estadísticas en tiempo real
 - Distribución por estado, urgencia, impacto, prioridad
-
-- Top categorías y ubicaciones más afectadas### 🎫 Gestión de Tickets
-
+- Top categorías y ubicaciones más afectadas
 - Resúmenes ejecutivos automáticos
 
-- Consulta tickets por estado (abiertos, cerrados, pendientes)[![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com/)
+---
 
 ## 🛠️ Stack Tecnológico
 
-- Búsqueda por fechas, usuarios, categorías
-
 ### Backend
 
-- **FastAPI** 0.100+ - Framework web moderno de Python- Análisis estadístico avanzado con visualización de distribuciones- 🧠 **IA Conversacional**: Groq AI con LLaMA 3.3 70B Versatile
+- **FastAPI** 0.100+ – Framework web moderno de Python
+- **Groq AI** – LLaMA 3.3-70B Versatile (≈280 tokens/s)
+- **SQLAlchemy** – ORM para persistencia de datos
+- **MariaDB/MySQL** – Base de datos relacional
+- **JWT** – Autenticación y autorización
+- **Pydantic** – Validación de datos
+- **Loguru** – Sistema de logs profesional
 
-- **Groq AI** - LLaMA 3.3-70B Versatile (280 tokens/seg)
+### Frontend
 
-- **SQLAlchemy** - ORM para persistencia de datos- Identificación de tendencias y patrones
-
-- **MariaDB/MySQL** - Base de datos relacional
-
-- **JWT** - Autenticación y autorización- 🎫 **Gestión de Tickets**: Consulta, busca y analiza tickets en lenguaje natural**Key Metrics:**[![Azure OpenAI](https://img.shields.io/badge/Azure%20OpenAI-GPT--4-orange.svg)](https://azure.microsoft.com/en-us/products/ai-services/openai-service)
-
-- **Pydantic** - Validación de datos
-
-- **Loguru** - Sistema de logs profesional### 💻 Inventario de TI
-
-
-
-### Frontend- Consulta de equipos y activos tecnológicos- 💻 **Inventario IT**: Explora equipos y activos tecnológicos
-
-- **Flutter** 3.0+ - Framework UI multiplataforma
-
-- **Provider** - State management- Búsqueda por ubicación, tipo, modelo, fabricante
-
-- **HTTP** - Cliente REST
-
-- **Flutter Secure Storage** - Almacenamiento de tokens- Detalle técnico de componentes (CPU, RAM, disco, red)- 📊 **Estadísticas Automáticas**: Análisis y visualización de datos- Processes up to 10,000 tickets in under 7 seconds[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
-- **Markdown** - Renderizado de respuestas formateadas
-
-- Información de software instalado
+- **Flutter** 3.0+ – Framework UI multiplataforma
+- **Provider** – State management
+- **HTTP** – Cliente REST
+- **Flutter Secure Storage** – Almacenamiento de tokens
+- **Markdown** – Renderizado de respuestas formateadas
 
 ### Integraciones
 
-- **GLPI REST API** - Gestión de tickets e inventario- 🔐 **Autenticación SSO**: Login con Microsoft Entra ID (Azure AD)
+- **GLPI REST API** – Gestión de tickets e inventario
+- **Groq Cloud API** – Modelos de lenguaje avanzados
 
-- **Groq Cloud API** - Modelos de lenguaje avanzados
-
-### 🤖 IA Conversacional
+---
 
 ## 📋 Requisitos
-
-- Procesamiento de lenguaje natural con **Groq LLaMA 3.3-70B**- 🎨 **UI Moderna**: Interface Flutter responsive y profesional- 95%+ intent classification accuracy
 
 ### Software Necesario
 
-- **Python** 3.10 o superior- Comprensión contextual de consultas complejas
-
+- **Python** 3.10 o superior
 - **Flutter SDK** 3.0 o superior
-
-- **MariaDB** o **MySQL** 8.0+- Respuestas en español e inglés- 🚀 **API REST**: Backend FastAPI escalable y documentado
-
+- **MariaDB** o **MySQL** 8.0+
 - **GLPI** 10.x con REST API habilitada
+- **Cuenta Groq** (gratuita) con API key
 
-- **Cuenta Groq** (gratuita) con API key- Análisis de grandes volúmenes de datos (1000+ tickets)
-
-
-
-### API Keys Requeridas- 💾 **Persistencia**: Historial de conversaciones con MariaDB/MySQL- Sub-2-second average response time---
+### API Keys Requeridas
 
 - **Groq API Key**: Obtener en [console.groq.com](https://console.groq.com/)
+- **GLPI Credentials**: App Token y User Token de GLPI
 
-- **GLPI Credentials**: App Token y User Token de GLPI### 🔐 Seguridad
+---
 
+## 🚀 Instalación
 
-
-## 🚀 Instalación- Autenticación JWT para API REST
-
-
-
-### 1. Clonar Repositorio- Soporte para SSO con OAuth 2.0 (Microsoft Entra ID)
+### 1. Clonar Repositorio
 
 ```bash
-
-git clone https://github.com/TU_USUARIO/glpi-ai-assistant.git- Cifrado de credenciales y tokens---- Professional UI inspired by Microsoft Copilot
-
+git clone https://github.com/TU_USUARIO/glpi-ai-assistant.git
 cd glpi-ai-assistant
-
-```- Integración segura con API de GLPI
-
-
+```
 
 ### 2. Configurar Backend
 
-
-
-#### 2.1 Crear Entorno Virtual### 📊 Reporting
+#### 2.1 Crear Entorno Virtual
 
 ```bash
-
-cd backend- Estadísticas en tiempo real## 🛠️ Stack Tecnológico## 🎯 ¿Qué hace este proyecto?
-
+cd backend
 python -m venv venv
 
-- Distribución por estado, urgencia, impacto, prioridad
-
 # Windows
+venv\Scripts\activate
 
-venv\Scripts\activate- Top categorías y ubicaciones más afectadas
-
-
-
-# Linux/Mac- Resúmenes ejecutivos automáticos
-
+# Linux/Mac
 source venv/bin/activate
-
-```### Backend## ✨ Enterprise Features
-
-
-
-#### 2.2 Instalar Dependencias## 🛠️ Stack Tecnológico
-
-```bash
-
-pip install -r requirements.txt- **FastAPI** - Framework web Python moderno
-
 ```
 
-### Backend
+#### 2.2 Instalar Dependencias
+
+```bash
+pip install -r requirements.txt
+```
 
 #### 2.3 Configurar Variables de Entorno
 
-Crear archivo `.env` en la carpeta `backend/`:- **FastAPI** 0.100+ - Framework web moderno de Python- **Groq API** - IA conversacional (LLaMA 3.3 70B)En lugar de navegar por menús de GLPI, simplemente pregunta:
+Crear archivo `.env` en la carpeta `backend/`:
 
 ```env
-
-# ===== GROQ CONFIGURATION =====- **Groq AI** - LLaMA 3.3-70B Versatile (280 tokens/seg)
-
+# ===== GROQ CONFIGURATION =====
 GROQ_API_KEY=gsk_tu_api_key_aqui
+GROQ_MODEL=llama-3.3-70b-versatile
 
-GROQ_MODEL=llama-3.3-70b-versatile- **SQLAlchemy** - ORM para persistencia de datos- **SQLAlchemy** - ORM para base de datos
-
-
-
-# ===== GLPI CONFIGURATION =====- **MariaDB/MySQL** - Base de datos relacional
-
+# ===== GLPI CONFIGURATION =====
 GLPI_URL=http://tu-servidor-glpi/apirest.php
-
-GLPI_APP_TOKEN=tu_app_token_aqui- **JWT** - Autenticación y autorización- **JWT** - Autenticación segura### Intelligent Query Processing
-
+GLPI_APP_TOKEN=tu_app_token_aqui
 GLPI_USER_TOKEN=tu_user_token_aqui
 
-- **Pydantic** - Validación de datos
-
 # ===== DATABASE CONFIGURATION =====
-
-DB_HOST=localhost- **Loguru** - Sistema de logs profesional- **Loguru** - Sistema de logging
-
+DB_HOST=localhost
 DB_PORT=3306
-
 DB_USER=root
-
 DB_PASSWORD=tu_password
+DB_NAME=glpi_sso
 
-DB_NAME=glpi_sso### Frontend- Natural language understanding with Groq AI (llama-3.3-70b-versatile)```
-
-
-
-# ===== SECURITY =====- **Flutter** 3.0+ - Framework UI multiplataforma
-
+# ===== SECURITY =====
 SECRET_KEY=tu_clave_secreta_super_segura_minimo_32_caracteres
+```
 
-```- **Provider** - State management### Frontend
-
-
-
-#### 2.4 Iniciar Base de Datos- **HTTP** - Cliente REST
+#### 2.4 Iniciar Base de Datos
 
 ```bash
-
-# Crear base de datos- **Flutter Secure Storage** - Almacenamiento de tokens- **Flutter** - Framework multiplataforma- Automatic intent classification and parameter extraction💬 "¿Cuántos tickets tengo abiertos?"
-
 mysql -u root -p
-
-CREATE DATABASE glpi_sso CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;- **Markdown** - Renderizado de respuestas formateadas
-
+CREATE DATABASE glpi_sso CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 exit
+```
 
-```- **Provider** - Gestión de estado
-
-
-
-#### 2.5 Iniciar Backend### Integraciones
+#### 2.5 Iniciar Backend
 
 ```bash
-
-cd backend- **GLPI REST API** - Gestión de tickets e inventario- **Material Design** - Diseño responsive- Confidence scoring for transparency🤖 "Tienes 5 tickets abiertos actualmente..."
-
+cd backend
 python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
-
-```- **Groq Cloud API** - Modelos de lenguaje avanzados
-
-
+```
 
 Backend disponible en: **http://localhost:8000**  
-
 Documentación API: **http://localhost:8000/docs**
-
-## 📋 Requisitos
 
 ### 3. Configurar Frontend
 
-### Infraestructura- Multi-language support (Spanish/English)
-
 #### 3.1 Instalar Dependencias Flutter
 
-```bash### Software Necesario
-
+```bash
 cd ../frontend
-
-flutter pub get- **Python** 3.10 o superior- **MariaDB/MySQL** - Base de datos
-
+flutter pub get
 ```
-
-- **Flutter SDK** 3.0 o superior
 
 #### 3.2 Verificar Configuración
 
-```bash- **MariaDB** o **MySQL** 8.0+- **GLPI REST API** - Integración con GLPI 10.0+💬 "Busca la computadora de Juan"
-
-flutter doctor
-
-```- **GLPI** 10.x con REST API habilitada
-
-
-
-#### 3.3 Iniciar Frontend- **Cuenta Groq** (gratuita) con API key- **Microsoft Entra ID** - SSO OAuth2
-
 ```bash
-
-# Web
-
-flutter run -d chrome --web-port 8080
-
-### API Keys Requeridas### Comprehensive Analytics🤖 "💻 PC-LAB-05 (Dell OptiPlex), Piso 2, Oficina 204"
-
-# Desktop (Windows)
-
-flutter run -d windows- **Groq API Key**: Obtener en [console.groq.com](https://console.groq.com/)
-
-
-
-# Desktop (macOS)- **GLPI Credentials**: App Token y User Token de GLPI---
-
-flutter run -d macos
-
-
-
-# Desktop (Linux)
-
-flutter run -d linux## 🚀 Instalación- Real-time ticket statistics (status, priority, type, urgency, impact)
-
+flutter doctor
 ```
 
+#### 3.3 Iniciar Frontend
 
+```bash
+# Web
+flutter run -d chrome --web-port 8080
+
+# Desktop (Windows)
+flutter run -d windows
+
+# Desktop (macOS)
+flutter run -d macos
+
+# Desktop (Linux)
+flutter run -d linux
+```
 
 Frontend disponible en: **http://localhost:8080** (web)
 
-### 1. Clonar Repositorio## 📋 Requisitos
+---
 
 ## 🎯 Uso
 
-```bash
-
 ### Ejemplos de Consultas
-
-git clone https://github.com/TU_USUARIO/glpi-ai-assistant.git- Historical trend analysis💬 "Muéstrame el ticket 123"
 
 #### Tickets
 
-```cd glpi-ai-assistant
-
 - ¿Cuántos tickets hay abiertos?
-
-- Muéstrame los tickets cerrados de esta semana```- **Python** 3.10+
-
+- Muéstrame los tickets cerrados de esta semana
 - Tickets pendientes en el área de soporte
-
 - Análisis de tickets por prioridad
-
 - ¿Cuál es la distribución de tickets por estado?
-
-```### 2. Configurar Backend- **Flutter** 3.0+- Custom report generation🤖 "🎫 Ticket #123: Problema con impresora..."
-
-
 
 #### Inventario
 
-```
-
-- ¿Cuántas computadoras hay en total?#### 2.1 Crear Entorno Virtual- **MariaDB/MySQL** 8.0+
-
+- ¿Cuántas computadoras hay en total?
 - Laptops en la oficina de Santiago
-
-- Equipos con Windows 11```bash
-
+- Equipos con Windows 11
 - Computadoras con más de 16GB de RAM
-
-- Servidores Dellcd backend- **GLPI** 10.0+ con API REST habilitada- Inventory management insights```
-
-```
-
-python -m venv venv
+- Servidores Dell
 
 #### Estadísticas
 
-```- **Groq API Key** (gratis en [console.groq.com](https://console.groq.com))
-
 - Dame un resumen de tickets
-
-- Estadísticas de soporte técnico# Windows
-
+- Estadísticas de soporte técnico
 - Top 5 categorías con más tickets
+- Distribución de tickets por urgencia
+
+### Capturas de Pantalla (idea)
+
+1. **Login**: Autenticación con credenciales GLPI  
+2. **Chat**: Interface conversacional con IA  
+3. **Resultados**: Respuestas formateadas con Markdown  
+4. **Estadísticas**: Visualización de distribuciones  
+
+---
+
+## 📐 Arquitectura
+
+```text
+┌─────────────────────┐
+│   Flutter Frontend  │  ← Interface de usuario (Web/Desktop/Mobile)
+│  (localhost:8080)   │
+└──────────┬──────────┘
+           │ HTTP/REST
+           ▼
+┌─────────────────────┐
+│   FastAPI Backend   │  ← API REST + Lógica de negocio
+│  (localhost:8000)   │
+└─────┬───────┬───────┘
+      │       │
+      │       └─────────────┐
+      ▼                     ▼
+┌──────────┐        ┌──────────────┐
+│  Groq AI │        │  GLPI API    │
+│  LLaMA   │        │  REST API    │
+└──────────┘        └──────────────┘
+      │                     │
+      │                     ▼
+      │             ┌──────────────┐
+      │             │  GLPI DB     │
+      │             │  (Tickets)   │
+      │             └──────────────┘
+      ▼
+┌──────────┐
+│ MariaDB  │  ← Persistencia de sesiones y usuarios
+└──────────┘
+```
+
+### Flujo de Procesamiento
+
+1. **Usuario** ingresa consulta en lenguaje natural.  
+2. **Frontend** envía request HTTP a `/api/v1/query`.  
+3. **Backend** recibe consulta y la envía a **Groq AI**.  
+4. **Groq** analiza intención y extrae parámetros.  
+5. **Backend** consulta datos en **GLPI API**.  
+6. **Backend** envía datos a **Groq** para generar respuesta.  
+7. **Groq** genera respuesta en lenguaje natural.  
+8. **Frontend** muestra respuesta formateada en Markdown.  
+
+---
+
+## 📁 Estructura del Proyecto
+
+```text
+
+├── backend/                     # Backend FastAPI
+│   ├── ai/                      # Módulo de IA
+│   │   ├── __init__.py
+│   │   └── agent.py             # Agente Groq AI
+│   ├── api/                     # Endpoints REST
+│   │   ├── __init__.py
+│   │   ├── routes.py            # Rutas principales
+│   │   ├── schemas.py           # Modelos Pydantic
+│   │   ├── chat_schemas.py      # Schemas de chat
+│   │   ├── conversation_routes.py
+│   │   ├── inventory_routes.py
+│   │   ├── settings_routes.py
+│   │   ├── statistics_routes.py
+│   │   └── tickets_routes.py
+│   ├── auth/                    # Autenticación
+│   │   ├── __init__.py
+│   │   ├── jwt_auth.py          # JWT tokens
+│   │   ├── models.py            # Modelos de usuarios
+	│   │   ├── auth_routes.py       # Login/Logout
+│   │   ├── sso_models.py        # Modelos SSO
+│   │   └── sso_routes.py        # OAuth 2.0 routes
+│   ├── integrations/            # Integraciones externas
+│   │   ├── __init__.py
+│   │   └── glpi_client.py       # Cliente GLPI API
+│   ├── services/                # Lógica de negocio
+│   │   ├── __init__.py
+│   │   ├── agent_service.py     # Servicio principal
+│   │   ├── conversation_service.py
+│   │   └── ticket_service.py
+│   ├── config.py                # Configuración global
+│   ├── main.py                  # Punto de entrada FastAPI
+│   ├── requirements.txt         # Dependencias Python
+│   └── .env.example             # Template de configuración
+│
+├── frontend/                    # Frontend Flutter
+│   ├── lib/
+│   │   ├── main.dart            # Punto de entrada
+│   │   ├── models/              # Modelos de datos
+│   │   ├── providers/           # State management
+│   │   ├── screens/             # Pantallas
+│   │   │   ├── login_screen.dart
+│   │   │   ├── chat_screen.dart
+│   │   │   └── settings_screen.dart
+│   │   ├── services/            # API clients
+│   │   │   └── api_service.dart
+│   │   └── widgets/             # Componentes reutilizables
+│   ├── assets/                  # Recursos estáticos
+│   │   └── logo.png
+│   └── pubspec.yaml             # Dependencias Flutter
+│
+├── .gitignore                   # Archivos ignorados por Git
+├── LICENSE                      # Licencia MIT
+└── README.md                    # Este archivo
+```
+
+---
+
+## 🔒 Seguridad
+
+### Buenas Prácticas Implementadas
+
+- **`.env` ignorado por Git** – Secrets fuera del repositorio.  
+- **JWT tokens** con expiración configurable.  
+- **Hashing de contraseñas** con bcrypt.  
+- **Validación de inputs** con Pydantic.  
+- **CORS configurado** para permitir solo origins autorizados.  
+- **Logs seguros** sin exposición de credenciales.  
+- **API Keys en variables de entorno** – Nunca hardcodeadas.  
+
+### Checklist de Seguridad
+
+- [ ] Cambiar `SECRET_KEY` en `.env` a un valor único y seguro (32+ caracteres).  
+- [ ] Rotar API keys regularmente.  
+- [ ] Usar HTTPS en producción (no HTTP).  
+- [ ] Configurar firewall para limitar acceso a puertos (8000, 3306).  
+- [ ] Mantener dependencias actualizadas (`pip list --outdated`).  
+- [ ] Habilitar logs de auditoría en GLPI.  
+- [ ] Implementar rate limiting en endpoints críticos.  
+
+---
+
+## 🚢 Despliegue (ideas)
+
+### Backend
+
+- Railway / Render / DigitalOcean / AWS (FastAPI + DB).  
+- Opcional: Dockerizar el backend con un `Dockerfile`.  
+
+### Frontend
+
+- Vercel / Netlify / Firebase Hosting para Flutter Web.  
+
+### Base de Datos
+
+- MariaDB/MySQL en servidor propio o cloud (Railway, PlanetScale, AWS RDS, etc.).  
+
+---
+
+## 🤝 Contribuir
+
+1. Haz fork de este repositorio.  
+2. Crea una rama para tu feature: `git checkout -b feature/nueva-funcionalidad`.  
+3. Commit de tus cambios: `git commit -m "Agregar nueva funcionalidad"`.  
+4. Push a tu rama: `git push origin feature/nueva-funcionalidad`.  
+5. Abre un Pull Request.  
+
+---
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver archivo [LICENSE](LICENSE) para más detalles.
+
+---
+
+<div align="center">
+
+**Desarrollado con ❤️ usando Groq AI, FastAPI y Flutter**  
+
+Si este proyecto te fue útil, considera darle una ⭐ en GitHub.
+
+</div>
+
+
+## 📐 Arquitectura
+
+
+
+```# ===== GLPI CONFIGURATION =====- **MariaDB/MySQL** - Base de datos relacional
+
+┌─────────────────────┐
+
+│   Flutter Frontend  │  ← Interface de usuario (Web/Desktop/Mobile)GLPI_URL=http://tu-servidor-glpi/apirest.php
+
+│  (localhost:8080)   │
+
+└──────────┬──────────┘GLPI_APP_TOKEN=tu_app_token_aqui- **JWT** - Autenticación y autorización- **JWT** - Autenticación segura### Intelligent Query Processing
+
+           │ HTTP/REST
+
+           ▼GLPI_USER_TOKEN=tu_user_token_aqui
+
+┌─────────────────────┐
+
+│   FastAPI Backend   │  ← API REST + Lógica de negocio- **Pydantic** - Validación de datos
+
+│  (localhost:8000)   │
+
+└─────┬───────┬───────┘# ===== DATABASE CONFIGURATION =====
+
+      │       │
+
+      │       └─────────────┐DB_HOST=localhost- **Loguru** - Sistema de logs profesional- **Loguru** - Sistema de logging
+
+      ▼                     ▼
+
+┌──────────┐        ┌──────────────┐DB_PORT=3306
+
+│  Groq AI │        │  GLPI API    │
+
+│  LLaMA   │        │  REST API    │DB_USER=root
+
+└──────────┘        └──────────────┘
+
+      │                     │DB_PASSWORD=tu_password
+
+      │                     ▼
+
+      │             ┌──────────────┐DB_NAME=glpi_sso### Frontend- Natural language understanding with Groq AI (llama-3.3-70b-versatile)```
+
+      │             │  GLPI DB     │
+
+      │             │  (Tickets)   │
+
+      │             └──────────────┘
+
+      ▼# ===== SECURITY =====- **Flutter** 3.0+ - Framework UI multiplataforma
+
+┌──────────┐
+
+│ MariaDB  │  ← Persistencia de sesiones y usuariosSECRET_KEY=tu_clave_secreta_super_segura_minimo_32_caracteres
+
+└──────────┘
+
+``````- **Provider** - State management### Frontend
+
+
+
+### Flujo de Procesamiento
+
+
+
+1. **Usuario** ingresa consulta en lenguaje natural#### 2.4 Iniciar Base de Datos- **HTTP** - Cliente REST
+
+2. **Frontend** envía request HTTP a `/api/v1/query`
+
+3. **Backend** recibe consulta y la envía a **Groq AI**```bash
+
+4. **Groq** analiza intención y extrae parámetros
+
+5. **Backend** consulta datos en **GLPI API**# Crear base de datos- **Flutter Secure Storage** - Almacenamiento de tokens- **Flutter** - Framework multiplataforma- Automatic intent classification and parameter extraction💬 "¿Cuántos tickets tengo abiertos?"
+
+6. **Backend** envía datos a **Groq** para generar respuesta
+
+7. **Groq** genera respuesta en lenguaje naturalmysql -u root -p
+
+8. **Frontend** muestra respuesta formateada en Markdown
+
+CREATE DATABASE glpi_sso CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;- **Markdown** - Renderizado de respuestas formateadas
+
+---
+
+exit
+
+## 📁 Estructura del Proyecto
+
+```- **Provider** - Gestión de estado
+
+```
+
+glpi-ai-assistant/
+
+├── backend/                     # Backend FastAPI
+
+│   ├── ai/                      # Módulo de IA#### 2.5 Iniciar Backend### Integraciones
+
+│   │   ├── __init__.py
+
+│   │   └── agent.py             # Agente Groq AI```bash
+
+│   ├── api/                     # Endpoints REST
+
+│   │   ├── __init__.pycd backend- **GLPI REST API** - Gestión de tickets e inventario- **Material Design** - Diseño responsive- Confidence scoring for transparency🤖 "Tienes 5 tickets abiertos actualmente..."
+
+│   │   ├── routes.py            # Rutas principales
+
+│   │   ├── schemas.py           # Modelos Pydanticpython -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+│   │   ├── chat_schemas.py      # Schemas de chat
+
+│   │   ├── conversation_routes.py```- **Groq Cloud API** - Modelos de lenguaje avanzados
+
+│   │   ├── inventory_routes.py
+
+│   │   ├── settings_routes.py
+
+│   │   ├── statistics_routes.py
+
+│   │   └── tickets_routes.pyBackend disponible en: **http://localhost:8000**  
+
+│   ├── auth/                    # Autenticación
+
+│   │   ├── __init__.pyDocumentación API: **http://localhost:8000/docs**
+
+│   │   ├── jwt_auth.py          # JWT tokens
+
+│   │   ├── models.py            # Modelos de usuarios## 📋 Requisitos
+
+│   │   ├── auth_routes.py       # Login/Logout
+
+│   │   ├── sso_models.py        # Modelos SSO### 3. Configurar Frontend
+
+│   │   └── sso_routes.py        # OAuth 2.0 routes
+
+│   ├── integrations/            # Integraciones externas### Infraestructura- Multi-language support (Spanish/English)
+
+│   │   ├── __init__.py
+
+│   │   └── glpi_client.py       # Cliente GLPI API#### 3.1 Instalar Dependencias Flutter
+
+│   ├── services/                # Lógica de negocio
+
+│   │   ├── __init__.py```bash### Software Necesario
+
+│   │   ├── agent_service.py     # Servicio principal
+
+│   │   ├── conversation_service.pycd ../frontend
+
+│   │   └── ticket_service.py
+
+│   ├── config.py                # Configuración globalflutter pub get- **Python** 3.10 o superior- **MariaDB/MySQL** - Base de datos
+
+│   ├── main.py                  # Punto de entrada FastAPI
+
+│   ├── requirements.txt         # Dependencias Python```
+
+│   └── .env.example             # Template de configuración
+
+│- **Flutter SDK** 3.0 o superior
+
+├── frontend/                    # Frontend Flutter
+
+│   ├── lib/#### 3.2 Verificar Configuración
+
+│   │   ├── main.dart            # Punto de entrada
+
+│   │   ├── models/              # Modelos de datos```bash- **MariaDB** o **MySQL** 8.0+- **GLPI REST API** - Integración con GLPI 10.0+💬 "Busca la computadora de Juan"
+
+│   │   ├── providers/           # State management
+
+│   │   ├── screens/             # Pantallasflutter doctor
+
+│   │   │   ├── login_screen.dart
+
+│   │   │   ├── chat_screen.dart```- **GLPI** 10.x con REST API habilitada
+
+│   │   │   └── settings_screen.dart
+
+│   │   ├── services/            # API clients
+
+│   │   │   └── api_service.dart
+
+│   │   └── widgets/             # Componentes reutilizables#### 3.3 Iniciar Frontend- **Cuenta Groq** (gratuita) con API key- **Microsoft Entra ID** - SSO OAuth2
+
+│   ├── assets/                  # Recursos estáticos
+
+│   │   └── logo.png```bash
+
+│   └── pubspec.yaml             # Dependencias Flutter
+
+│# Web
+
+├── .gitignore                   # Archivos ignorados por Git
+
+├── LICENSE                      # Licencia MITflutter run -d chrome --web-port 8080
+
+└── README.md                    # Este archivo
+
+```### API Keys Requeridas### Comprehensive Analytics🤖 "💻 PC-LAB-05 (Dell OptiPlex), Piso 2, Oficina 204"
+
+
+
+---# Desktop (Windows)
+
+
+
+## 🔒 Seguridadflutter run -d windows- **Groq API Key**: Obtener en [console.groq.com](https://console.groq.com/)
+
+
+
+### Buenas Prácticas Implementadas
+
+
+
+✅ **Nunca commitear `.env`** - Archivo con secrets excluido de Git  # Desktop (macOS)- **GLPI Credentials**: App Token y User Token de GLPI---
+
+✅ **JWT tokens** con expiración configurable  
+
+✅ **Hashing de contraseñas** con bcrypt  flutter run -d macos
+
+✅ **Validación de inputs** con Pydantic  
+
+✅ **CORS configurado** para permitir solo origins autorizados  
+
+✅ **Logs seguros** sin exposición de credenciales  
+
+✅ **API Keys en variables de entorno** - No hardcodeadas  # Desktop (Linux)
+
+
+
+### Checklist de Seguridadflutter run -d linux## 🚀 Instalación- Real-time ticket statistics (status, priority, type, urgency, impact)
+
+
+
+- [ ] Cambiar `SECRET_KEY` en `.env` a un valor único y seguro (32+ caracteres)```
+
+- [ ] Rotar API keys regularmente
+
+- [ ] Usar HTTPS en producción (no HTTP)
+
+- [ ] Configurar firewall para limitar acceso a puertos (8000, 3306)
+
+- [ ] Mantener dependencias actualizadas (`pip list --outdated`)Frontend disponible en: **http://localhost:8080** (web)
+
+- [ ] Habilitar logs de auditoría en GLPI
+
+- [ ] Implementar rate limiting en endpoints críticos### 1. Clonar Repositorio## 📋 Requisitos
+
+
+
+---## 🎯 Uso
+
+
+
+## 🚢 Despliegue```bash
+
+
+
+### Backend (Sugerencias)### Ejemplos de Consultas
+
+
+
+- **Railway**: [railway.app](https://railway.app/) - Deploy automático desde GitHubgit clone https://github.com/TU_USUARIO/glpi-ai-assistant.git- Historical trend analysis💬 "Muéstrame el ticket 123"
+
+- **Render**: [render.com](https://render.com/) - Free tier disponible
+
+- **DigitalOcean**: App Platform con Python + MySQL#### Tickets
+
+- **AWS**: EC2 + RDS MySQL
+
+- **Docker**: Containerizar con `Dockerfile` (pendiente agregar)```cd glpi-ai-assistant
+
+
+
+### Frontend (Sugerencias)- ¿Cuántos tickets hay abiertos?
+
+
+
+- **Vercel**: Para Flutter Web- Muéstrame los tickets cerrados de esta semana```- **Python** 3.10+
+
+- **Netlify**: Para aplicaciones estáticas
+
+- **GitHub Pages**: Hosting gratuito- Tickets pendientes en el área de soporte
+
+- **Firebase Hosting**: CDN global
+
+- Análisis de tickets por prioridad
+
+### Base de Datos
+
+- ¿Cuál es la distribución de tickets por estado?
+
+- **MariaDB/MySQL** local o cloud
+
+- **PlanetScale**: MySQL serverless gratuito```### 2. Configurar Backend- **Flutter** 3.0+- Custom report generation🤖 "🎫 Ticket #123: Problema con impresora..."
+
+- **Railway**: MySQL managed database
+
+- **AWS RDS**: MySQL en Amazon
+
+
+
+---#### Inventario
+
+
+
+## 🤝 Contribuir```
+
+
+
+Las contribuciones son bienvenidas! Por favor:- ¿Cuántas computadoras hay en total?#### 2.1 Crear Entorno Virtual- **MariaDB/MySQL** 8.0+
+
+
+
+1. Fork este repositorio- Laptops en la oficina de Santiago
+
+2. Crea una rama para tu feature (`git checkout -b feature/nueva-funcionalidad`)
+
+3. Commit tus cambios (`git commit -m 'Agregar nueva funcionalidad'`)- Equipos con Windows 11```bash
+
+4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
+
+5. Abre un Pull Request- Computadoras con más de 16GB de RAM
+
+
+
+---- Servidores Dellcd backend- **GLPI** 10.0+ con API REST habilitada- Inventory management insights```
+
+
+
+## 📄 Licencia```
+
+
+
+Este proyecto está bajo la Licencia MIT. Ver archivo [LICENSE](LICENSE) para más detalles.python -m venv venv
+
+
+
+---#### Estadísticas
+
+
+
+<div align="center">```- **Groq API Key** (gratis en [console.groq.com](https://console.groq.com))
+
+
+
+**Desarrollado con ❤️ usando Groq AI y FastAPI**- Dame un resumen de tickets
+
+
+
+Si este proyecto te fue útil, considera darle una ⭐ en GitHub!- Estadísticas de soporte técnico# Windows
+
+
+
+</div>- Top 5 categorías con más tickets
+
 
 - Distribución de tickets por urgenciavenv\Scripts\activate
 
