@@ -13,7 +13,7 @@
 >
 > Consulta tickets, inventario y estadísticas usando IA conversacional con LLaMA 3.3.
 
-[Características](#-características) • [Instalación](#-instalación) • [Uso](#-uso) • [Arquitectura](#-arquitectura)
+[Características](#-características) • [Instalación](#-instalación) • [Uso](#-uso)
 
 </div>
 
@@ -254,111 +254,7 @@ Frontend disponible en: **http://localhost:8080** (web)
 
 ---
 
-## 📐 Arquitectura
-
-```text
-┌─────────────────────┐
-│   Flutter Frontend  │  ← Interface de usuario (Web/Desktop/Mobile)
-│  (localhost:8080)   │
-└──────────┬──────────┘
-           │ HTTP/REST
-           ▼
-┌─────────────────────┐
-│   FastAPI Backend   │  ← API REST + Lógica de negocio
-│  (localhost:8000)   │
-└─────┬───────┬───────┘
-      │       │
-      │       └─────────────┐
-      ▼                     ▼
-┌──────────┐        ┌──────────────┐
-│  Groq AI │        │  GLPI API    │
-│  LLaMA   │        │  REST API    │
-└──────────┘        └──────────────┘
-      │                     │
-      │                     ▼
-      │             ┌──────────────┐
-      │             │  GLPI DB     │
-      │             │  (Tickets)   │
-      │             └──────────────┘
-      ▼
-┌──────────┐
-│ MariaDB  │  ← Persistencia de sesiones y usuarios
-└──────────┘
-```
-
-### Flujo de Procesamiento
-
-1. **Usuario** ingresa consulta en lenguaje natural.  
-2. **Frontend** envía request HTTP a `/api/v1/query`.  
-3. **Backend** recibe consulta y la envía a **Groq AI**.  
-4. **Groq** analiza intención y extrae parámetros.  
-5. **Backend** consulta datos en **GLPI API**.  
-6. **Backend** envía datos a **Groq** para generar respuesta.  
-7. **Groq** genera respuesta en lenguaje natural.  
-8. **Frontend** muestra respuesta formateada en Markdown.  
-
----
-
-## 📁 Estructura del Proyecto
-
-```text
-
-├── backend/                     # Backend FastAPI
-│   ├── ai/                      # Módulo de IA
-│   │   ├── __init__.py
-│   │   └── agent.py             # Agente Groq AI
-│   ├── api/                     # Endpoints REST
-│   │   ├── __init__.py
-│   │   ├── routes.py            # Rutas principales
-│   │   ├── schemas.py           # Modelos Pydantic
-│   │   ├── chat_schemas.py      # Schemas de chat
-│   │   ├── conversation_routes.py
-│   │   ├── inventory_routes.py
-│   │   ├── settings_routes.py
-│   │   ├── statistics_routes.py
-│   │   └── tickets_routes.py
-│   ├── auth/                    # Autenticación
-│   │   ├── __init__.py
-│   │   ├── jwt_auth.py          # JWT tokens
-│   │   ├── models.py            # Modelos de usuarios
-	│   │   ├── auth_routes.py       # Login/Logout
-│   │   ├── sso_models.py        # Modelos SSO
-│   │   └── sso_routes.py        # OAuth 2.0 routes
-│   ├── integrations/            # Integraciones externas
-│   │   ├── __init__.py
-│   │   └── glpi_client.py       # Cliente GLPI API
-│   ├── services/                # Lógica de negocio
-│   │   ├── __init__.py
-│   │   ├── agent_service.py     # Servicio principal
-│   │   ├── conversation_service.py
-│   │   └── ticket_service.py
-│   ├── config.py                # Configuración global
-│   ├── main.py                  # Punto de entrada FastAPI
-│   ├── requirements.txt         # Dependencias Python
-│   └── .env.example             # Template de configuración
-│
-├── frontend/                    # Frontend Flutter
-│   ├── lib/
-│   │   ├── main.dart            # Punto de entrada
-│   │   ├── models/              # Modelos de datos
-│   │   ├── providers/           # State management
-│   │   ├── screens/             # Pantallas
-│   │   │   ├── login_screen.dart
-│   │   │   ├── chat_screen.dart
-│   │   │   └── settings_screen.dart
-│   │   ├── services/            # API clients
-│   │   │   └── api_service.dart
-│   │   └── widgets/             # Componentes reutilizables
-│   ├── assets/                  # Recursos estáticos
-│   │   └── logo.png
-│   └── pubspec.yaml             # Dependencias Flutter
-│
-├── .gitignore                   # Archivos ignorados por Git
-├── LICENSE                      # Licencia MIT
-└── README.md                    # Este archivo
-```
-
----
+<!-- Secciones técnicas detalladas (arquitectura y estructura de carpetas) se han simplificado para mantener el README ligero y fácil de leer. -->
 
 ## 🔒 Seguridad
 
